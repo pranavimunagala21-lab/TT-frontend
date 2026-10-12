@@ -7,6 +7,7 @@ import DirectoryPage from './pages/DirectoryPage'
 import NotificationsPage from './pages/NotificationsPage'
 import AiSearchPage from './pages/AiSearchPage'
 import AdminPage from './pages/AdminPage'
+import AdminProjectsPage from './pages/AdminProjectsPage'
 import LoadingScreen from './components/LoadingScreen'
 import AdminShell from './components/AdminShell'
 import AdminOverview from './pages/AdminOverview'
@@ -38,7 +39,7 @@ export default function App() {
       <Route path="users" element={<UserManagementPage />} />
       <Route path="venues" element={<AdminResourcePage type="venues" />} />
       <Route path="bookings" element={<AdminPage view="bookings" />} />
-      <Route path="projects" element={<AdminPage view="projects" />} />
+      <Route path="projects" element={<AdminProjectsPage />} />
       <Route path="clubs" element={<AdminResourcePage type="clubs" />} />
       <Route path="equipment" element={<AdminResourcePage type="equipment" />} />
       <Route path="equipment-requests" element={<AdminPage view="equipment-requests" />} />

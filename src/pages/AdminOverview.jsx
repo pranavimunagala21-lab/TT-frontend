@@ -22,7 +22,7 @@ export default function AdminOverview({ profileOnly = false }) {
         ...equipmentRequests.map((x) => ({ ...x, kind: x.reviewedAt ? 'Equipment decision' : 'Equipment request', person: x.requester?.name || x.requester?.email, date: x.reviewedAt || x.requestDate })),
         ...projects.map((x) => ({ ...x, kind: x.reviewedAt ? 'Project decision' : 'Project submission', person: x.owner?.name || x.owner?.email, date: x.reviewedAt || x.createdAt }))]
         .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0)).slice(0, 6)
-      setData({ queues, students: students.totalElements, admins: admins.totalElements, venues: venues.length, available, recent })
+      setData({ queues, students: students.totalElements, admins: admins.totalElements, projects: projects.length, venues: venues.length, available, recent })
     }).catch((e) => { if (active) setError(e.message) })
     return () => { active = false }
   }, [profileOnly, reload])
@@ -31,7 +31,7 @@ export default function AdminOverview({ profileOnly = false }) {
   if (!data) return <LoadingScreen label="Loading live campus administration data…" />
   const metrics = [
     ['Students', data.students], ['Administrators', data.admins], ['Pending bookings', data.queues.bookings?.length || 0],
-    ['Pending projects', data.queues.projectProposals?.length || 0], ['Pending equipment requests', data.queues.equipmentRequests?.length || 0],
+    ['Projects', data.projects], ['Pending projects', data.queues.projectProposals?.length || 0], ['Pending equipment requests', data.queues.equipmentRequests?.length || 0],
     ['Venues', data.venues], ['Available equipment', data.available],
   ]
   return <div className="directory-page admin-overview"><div className="page-intro"><div><span className="eyebrow">ADMINISTRATION</span><h1>Admin Overview</h1><p>Live totals and pending work from CampusSphere.</p></div><div className="directory-tools"><span className="role-pill">ADMIN · {user?.name}</span><button className="button secondary" onClick={() => { setData(null); setReload((n) => n + 1) }}>Refresh</button></div></div>
